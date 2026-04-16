@@ -1221,9 +1221,9 @@ def get_external_db():
             try:
                 connection = pymysql.connect(
                     host=host,
-                    user="u313852103_gradyen",
-                    password="*Q==EV8zV",
-                    database="u313852103_gradyens",
+                    user=os.environ.get("EXTERNAL_DB_USER", "u313852103_gradyen"),
+                    password=os.environ.get("EXTERNAL_DB_PASS", "*Q==EV8zV"),
+                    database=os.environ.get("EXTERNAL_DB_NAME", "u313852103_gradyens"),
                     cursorclass=pymysql.cursors.DictCursor,
                     connect_timeout=5
                 )
