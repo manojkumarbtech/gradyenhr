@@ -1,6 +1,22 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: hrms-postgres
+    environment:
+      - POSTGRES_USER=hrms_user
+      - POSTGRES_PASSWORD=hrms_password
+      - POSTGRES_DB=hrms_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - hrms-network
+
   # Backend API
   backend:
     build:
@@ -19,6 +35,8 @@ services:
       - EXTERNAL_DB_NAME=${EXTERNAL_DB_NAME}
     env_file:
       - .env
+    depends_on:
+      - postgres
     volumes:
       - hrms-data:/app
     restart: always
@@ -45,3 +63,4 @@ networks:
 
 volumes:
   hrms-data:
+  postgres-data:
