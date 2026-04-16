@@ -2,12 +2,9 @@ from datetime import datetime, date
 from sqlalchemy.orm import Session
 from app.core.database import SessionLocal, engine, Base
 from app.models.models import User, Department, LeaveType, UserRole, Holiday
-import hashlib
+from app.core.auth import hash_password
 
 Base.metadata.create_all(bind=engine)
-
-def hash_password(password: str) -> str:
-    return hashlib.sha256(password.encode()).hexdigest()
 
 def seed_data():
     db = SessionLocal()
