@@ -18,6 +18,8 @@ services:
       - EXTERNAL_DB_USER=${EXTERNAL_DB_USER}
       - EXTERNAL_DB_PASS=${EXTERNAL_DB_PASS}
       - EXTERNAL_DB_NAME=${EXTERNAL_DB_NAME}
+    env_file:
+      - .env
     volumes:
       - hrms-data:/app
     restart: always
@@ -44,7 +46,3 @@ networks:
 
 volumes:
   hrms-data:
-
-# Environment variables (copy .env.example and update)
-env_file:
-  - .env
