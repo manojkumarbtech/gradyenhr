@@ -213,6 +213,33 @@ export default function Auth() {
               </div>
             )}
 
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                <Input 
+                  id="email" 
+                  type="email" 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  required 
+                  placeholder="Enter your email"
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+                <Input 
+                  id="password" 
+                  type="password" 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                  required 
+                  placeholder="Enter your password"
+                  className="mt-1"
+                />
+              </div>
+            </div>
+
                 <Button
               type="submit" 
               className="w-full h-12 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-medium shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200"
@@ -232,12 +259,7 @@ export default function Auth() {
             </Button>
           </form>
 
-          {/* Demo Notice */}
-          <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl border border-indigo-100 dark:border-indigo-800">
-            <p className="text-sm text-center text-indigo-700 dark:text-indigo-300">
-              <span className="font-medium">Demo Access:</span> s.manojkumar@gradyens.com / admin123
-            </p>
-          </div>
+          
 
           {/* Mobile Footer */}
           <div className="lg:hidden text-center text-sm text-slate-500">
