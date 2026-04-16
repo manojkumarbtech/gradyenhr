@@ -1,0 +1,45 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+hrms-app/frontend/node_modules
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+venv/
+env/
+.venv/
+hrms-app/backend/venv/
+
+# Build outputs
+dist
+build
+*.egg-info
+hrms-app/frontend/dist
+
+# IDE
+.idea
+.vscode
+
+# Database
+*.db
+*.sqlite
+hrms.db
+hrms-app/backend/hrms.db
+
+# Docker
+hrms-data/
+.dockerignore
+
+# Environment
+.env
+.env.local
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db

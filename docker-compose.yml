@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: hrms-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./hrms.db
+      - SECRET_KEY=${SECRET_KEY}
+      - TOKEN_EXPIRE_MINUTES=${TOKEN_EXPIRE_MINUTES:-480}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost}
+      - EXTERNAL_DB_HOST=${EXTERNAL_DB_HOST}
+      - EXTERNAL_DB_USER=${EXTERNAL_DB_USER}
+      - EXTERNAL_DB_PASS=${EXTERNAL_DB_PASS}
+      - EXTERNAL_DB_NAME=${EXTERNAL_DB_NAME}
+    volumes:
+      - hrms-data:/app
+    restart: always
+    networks:
+      - hrms-network
+
+  # Frontend Nginx
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: hrms-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - hrms-network
+
+networks:
+  hrms-network:
+    driver: bridge
+
+volumes:
+  hrms-data:
+
+# Environment variables (copy .env.example and update)
+env_file:
+  - .env
