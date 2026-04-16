@@ -6,7 +6,7 @@ WORKDIR /app
 COPY hrms-app/frontend/package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Set frontend build env - will be replaced by nginx proxy
 ENV VITE_API_URL=/api
