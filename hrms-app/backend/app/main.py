@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from sqlalchemy.orm import Session
-from app.core.database import get_db, engine, Base
+from app.core.database import get_db, engine, Base, SessionLocal
 from app.core.auth import verify_password, hash_password, create_access_token, decode_token
 from app.models.models import User, Department, Employee, Intern, LeaveType, LeaveRequest, LeaveBalance, Attendance, TrainingEvent, TrainingAssignment, Holiday, JobPosting, Applicant, Asset, AssetCategory, AssetAssignment, AssetReturnRequest, UserRole, MasterDataEntry, UserPermission, Inquiry
 from app.schemas.schemas import (
@@ -34,6 +34,20 @@ from enum import Enum
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 Base.metadata.create_all(bind=engine)
+
+# Create admin user if not exists
+db = SessionLocal()
+if not db.query(User).filter(User.email == "s.manojkumar@gradyens.com").first():
+    admin = User(
+        email="s.manojkumar@gradyens.com",
+        password=hash_password("admin123"),
+        name="Manoj Kumar S",
+        role=UserRole.admin,
+        is_active=True
+    )
+    db.add(admin)
+    db.commit()
+db.close()
 
 app = FastAPI(title="HRMS API", description="Human Resource Management System API")
 
