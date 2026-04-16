@@ -10,7 +10,7 @@ import {
   User, Calendar, Building, BookOpen
 } from "lucide-react"
 
-const API_URL = "http://localhost:8000"
+const API_URL = "/api"
 
 interface UserProfile {
   id: number

@@ -6,7 +6,7 @@ import { Input } from "@/shared/ui/input"
 import { Label } from "@/shared/ui/label"
 import { inquiriesApi } from "@/shared/lib/api"
 
-const API_URL = "http://localhost:8000"
+const API_URL = "/api"
 
 const features = [
   { icon: "👥", title: "Employee Management", desc: "Manage your team effectively" },

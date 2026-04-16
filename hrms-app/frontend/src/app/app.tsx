@@ -25,7 +25,7 @@ import MasterData from "@/features/masterdata"
 import Inquiries from "@/features/inquiries"
 import { useEffect, useState } from "react"
 
-const API_URL = "http://localhost:8000"
+const API_URL = "/api"
 
 async function validateToken(token: string) {
   try {
