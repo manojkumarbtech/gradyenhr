@@ -23,7 +23,7 @@ const stats = [
 
 export default function Auth() {
   const [email, setEmail] = useState("s.manojkumar@gradyens.com")
-  const [password, setPassword] = useState("admin123")
+  const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState("")
