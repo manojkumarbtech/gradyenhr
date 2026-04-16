@@ -33,7 +33,7 @@ services:
       dockerfile: Dockerfile.frontend
     container_name: hrms-frontend
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
       - backend
     restart: always
