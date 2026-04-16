@@ -70,11 +70,14 @@ export default function Auth() {
       })
 
       if (!response.ok) {
-        const data = await response.json()
+        const data = await response.json().catch(() => ({}))
         throw new Error(data.detail || "Invalid credentials")
       }
 
-      const data = await response.json()
+      const data = await response.json().catch(() => ({}))
+      if (!data.access_token) {
+        throw new Error("Invalid response from server")
+      }
       localStorage.setItem("token", data.access_token)
 
       const userResponse = await fetch(`${API_URL}/users/me`, {
@@ -184,7 +187,7 @@ export default function Auth() {
       </div>
 
       {/* Right Panel - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <div className="flex-1 flex items-center justify-center p-8 bg-white">
         <div className="w-full max-w-md space-y-8">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center justify-center gap-3 mb-8">

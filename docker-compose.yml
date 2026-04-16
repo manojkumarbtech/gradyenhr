@@ -10,7 +10,6 @@ services:
     ports:
       - "3001:8000"
     environment:
-      - DATABASE_URL=sqlite:///./hrms.db
       - SECRET_KEY=${SECRET_KEY}
       - TOKEN_EXPIRE_MINUTES=${TOKEN_EXPIRE_MINUTES:-480}
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost}
