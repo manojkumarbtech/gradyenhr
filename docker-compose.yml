@@ -30,6 +30,8 @@ services:
       - EXTERNAL_DB_USER=${EXTERNAL_DB_USER}
       - EXTERNAL_DB_PASS=${EXTERNAL_DB_PASS}
       - EXTERNAL_DB_NAME=${EXTERNAL_DB_NAME}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-s.manojkumar@gradyens.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
     env_file:
       - .env
     depends_on:

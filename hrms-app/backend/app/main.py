@@ -35,25 +35,21 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 Base.metadata.create_all(bind=engine)
 
-# Create admin user if not exists or ensure correct password
+# Create admin user from environment variables if not exists
 db = SessionLocal()
-admin_user = db.query(User).filter(User.email == "s.manojkumar@gradyens.com").first()
+admin_email = os.environ.get("ADMIN_EMAIL", "s.manojkumar@gradyens.com")
+admin_password = os.environ.get("ADMIN_PASSWORD", "admin123")
+admin_user = db.query(User).filter(User.email == admin_email).first()
 if not admin_user:
     admin = User(
-        email="s.manojkumar@gradyens.com",
-        password=hash_password("admin123"),
-        name="Manoj Kumar S",
+        email=admin_email,
+        password=hash_password(admin_password),
+        name="Admin",
         role=UserRole.admin,
         is_active=True
     )
     db.add(admin)
     db.commit()
-else:
-    # Ensure password is correct (rehash if needed)
-    from app.core.auth import verify_password
-    if not verify_password("admin123", admin_user.password):
-        admin_user.password = hash_password("admin123")
-        db.commit()
 db.close()
 
 app = FastAPI(title="HRMS API", description="Human Resource Management System API")
